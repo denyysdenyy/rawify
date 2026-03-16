@@ -6,6 +6,7 @@ type WeightInputProps = {
   value: string
   onChange: (value: string) => void
   disabled?: boolean
+  suffix?: string
 }
 
 export default function WeightInput({
@@ -14,6 +15,7 @@ export default function WeightInput({
   value,
   onChange,
   disabled = false,
+  suffix = 'г',
 }: WeightInputProps) {
   return (
     <div className="flex flex-col gap-1.5">
@@ -42,9 +44,11 @@ export default function WeightInput({
             }
           `}
         />
-        <span className={`absolute right-4 top-1/2 -translate-y-1/2 font-medium ${disabled ? 'text-gray-200' : 'text-gray-300'}`}>
-          г
-        </span>
+        {suffix && (
+          <span className={`absolute right-4 top-1/2 -translate-y-1/2 font-medium ${disabled ? 'text-gray-200' : 'text-gray-300'}`}>
+            {suffix}
+          </span>
+        )}
       </div>
     </div>
   )

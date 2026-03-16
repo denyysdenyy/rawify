@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import WeightInput from './WeightInput'
 import ProductSelect, { products } from './ProductSelect'
-import { validateCoefficient } from '../src/utils/validation'
+import { validateCoefficient } from "../src/utils/validation"
 
 export default function Calculator() {
   const [product, setProduct] = useState('chicken_breast')
@@ -15,12 +16,21 @@ export default function Calculator() {
   const [portion, setPortion] = useState('')
 
   const isBaseReady = rawWeight.trim() !== '' && cookedWeight.trim() !== ''
+  const isDirty = rawWeight || cookedWeight || containers || portion
 
   const raw = parseFloat(rawWeight)
   const cooked = parseFloat(cookedWeight)
 
   const handleProductChange = (value: string) => {
     setProduct(value)
+    setMethod('')
+    setRawWeight('')
+    setCookedWeight('')
+    setContainers('')
+    setPortion('')
+  }
+
+  const handleReset = () => {
     setMethod('')
     setRawWeight('')
     setCookedWeight('')
@@ -74,40 +84,69 @@ export default function Calculator() {
 
         {/* Результат */}
         <div className="flex flex-col items-center gap-3 pb-4 border-b border-gray-100">
-          <div className="flex items-baseline gap-2">
-            <span className="text-5xl font-bold text-gray-800">
-              {result ? Math.round(result.rawToLog) : '—'}
-            </span>
-            <span className="text-2xl text-gray-300 font-medium">
-              {result ? 'г сирого' : 'г'}
-            </span>
-          </div>
-
-          {result && (
-            <div className="flex items-center gap-2 bg-[#F2F2F7] rounded-2xl px-4 py-2">
-              <span className="text-sm text-gray-400">В лоток (готового):</span>
-              <span className="text-sm font-bold text-gray-700">
-                {Math.round(result.cookedPortion)} г
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={result ? Math.round(result.rawToLog) : 'empty'}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-baseline gap-2"
+            >
+              <span className="text-5xl font-bold text-gray-800">
+                {result ? Math.round(result.rawToLog) : 0}
               </span>
-            </div>
-          )}
+              <span className="text-2xl text-gray-300 font-medium">
+                {result ? 'г сирого' : 'г'}
+              </span>
+            </motion.div>
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {result && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center gap-2 bg-[#F2F2F7] rounded-2xl px-4 py-2"
+              >
+                <span className="text-sm text-gray-400">В лоток (готового):</span>
+                <span className="text-sm font-bold text-gray-700">
+                  {Math.round(result.cookedPortion)} г
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {isBaseReady && !validationError && (
-            <span className="text-xs text-blue-400 font-medium">
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-xs text-blue-400 font-medium"
+            >
               точний коефіцієнт: {coefficient.toFixed(3)}
-            </span>
+            </motion.span>
           )}
         </div>
 
         {/* Ошибка валидации */}
-        {validationError && (
-          <div className="flex gap-3 bg-red-50 border border-red-100 rounded-2xl px-4 py-3">
-            <span className="text-lg">⚠️</span>
-            <p className="text-sm text-red-500 font-medium leading-snug">
-              {validationError}
-            </p>
-          </div>
-        )}
+        <AnimatePresence>
+          {validationError && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="flex gap-3 bg-red-50 border border-red-100 rounded-2xl px-4 py-3"
+            >
+              <span className="text-lg">⚠️</span>
+              <p className="text-sm text-red-500 font-medium leading-snug">
+                {validationError}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Форма */}
         <ProductSelect
@@ -174,6 +213,22 @@ export default function Calculator() {
             />
           )}
         </div>
+
+        {/* Reset кнопка */}
+        <AnimatePresence>
+          {isDirty && (
+            <motion.button
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.2 }}
+              onClick={handleReset}
+              className="w-full py-3 rounded-2xl text-sm font-medium text-gray-400 bg-[#F2F2F7] hover:bg-red-50 hover:text-red-400 transition-all duration-200"
+            >
+              Очистити все
+            </motion.button>
+          )}
+        </AnimatePresence>
 
       </div>
     </div>

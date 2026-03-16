@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import WeightInput from './WeightInput'
-import ProductSelect, { products } from './ProductSelect'
+import ProductSelect from './ProductSelect'
+import { products } from '../data/products'
 import { validateCoefficient } from '../utils/validation'
 
 export default function Calculator() {
@@ -85,7 +86,6 @@ export default function Calculator() {
     <div className="w-full max-w-lg px-4 pb-8">
       <div className="bg-white rounded-3xl p-6 shadow-sm flex flex-col gap-6">
 
-        {/* Результат */}
         <div className="flex flex-col items-center gap-3 pb-4 border-b border-gray-100">
           <AnimatePresence mode="wait">
             <motion.div
@@ -133,7 +133,6 @@ export default function Calculator() {
           )}
         </div>
 
-        {/* Ошибка валидации */}
         <AnimatePresence>
           {validationError && (
             <motion.div
@@ -151,7 +150,6 @@ export default function Calculator() {
           )}
         </AnimatePresence>
 
-        {/* Форма */}
         <ProductSelect
           productValue={product}
           methodValue={method}
@@ -173,7 +171,6 @@ export default function Calculator() {
           onChange={setCookedWeight}
         />
 
-        {/* Режим порції */}
         <div className={`flex flex-col gap-3 transition-opacity duration-200 ${!isBaseReady ? 'opacity-30 pointer-events-none' : ''}`}>
           <span className="text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
             {t('portionMode')}
@@ -217,7 +214,6 @@ export default function Calculator() {
           )}
         </div>
 
-        {/* Reset */}
         <AnimatePresence>
           {isDirty && (
             <motion.button

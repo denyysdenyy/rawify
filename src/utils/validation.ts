@@ -1,11 +1,10 @@
-import { ProductCategory } from '../components/ProductSelect'
+import { ProductCategory } from '../data/products'
 
 type ValidationResult = {
   valid: boolean
   error?: string
 }
 
-// Допустимые диапазоны коэффициента (сырой / готовый)
 const ranges: Record<ProductCategory, { min: number; max: number; label: string }> = {
   meat: {
     min: 1.15,

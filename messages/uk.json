@@ -1,0 +1,58 @@
+{
+  "header": {
+    "beta": "beta"
+  },
+  "calculator": {
+    "result": "г сирого",
+    "resultEmpty": "г",
+    "inContainer": "В лоток (готового):",
+    "coefficient": "точний коефіцієнт",
+    "product": "Продукт",
+    "cookingMethod": "Спосіб приготування",
+    "selectMethod": "Оберіть спосіб приготування",
+    "rawWeight": "Сирий вес (до готовки)",
+    "rawPlaceholder": "напр. 400",
+    "cookedWeight": "Готовий вес (вся каструля)",
+    "cookedPlaceholder": "напр. 900",
+    "portionMode": "Як рахуємо порцію?",
+    "byContainers": "Ділити на лотки",
+    "byPortion": "Важу порцію",
+    "containersLabel": "Кількість лотків",
+    "containersPlaceholder": "напр. 6",
+    "portionLabel": "Порція готового (г)",
+    "portionPlaceholder": "напр. 150",
+    "reset": "Очистити все"
+  },
+  "products": {
+    "chicken_breast": "🍗 Куряча грудка",
+    "chicken_thigh": "🍗 Куряче стегно",
+    "beef": "🥩 Яловичина",
+    "pork": "🥩 Свинина",
+    "salmon": "🐟 Лосось",
+    "tuna": "🐟 Тунець",
+    "eggs": "🥚 Яйця",
+    "rice": "🍚 Рис",
+    "buckwheat": "🌾 Гречка",
+    "oats": "🌾 Вівсянка"
+  },
+  "methods": {
+    "grill": "Гриль / Сковорода",
+    "oven": "Духовка",
+    "boil": "Варка",
+    "foil": "У фользі",
+    "steam": "Пара",
+    "fry": "Смажені",
+    "boil_soft": "Варка (розварений)",
+    "water": "На воді",
+    "milk": "На молоці"
+  },
+  "coefficient": {
+    "title": "Коефіцієнти ужарки та уварки",
+    "description": "Оберіть продукт щоб дізнатись скільки ваги він втрачає або набирає при готовці",
+    "meat": "М'ясо та риба",
+    "grains": "Крупи та каші",
+    "other": "Інше",
+    "howToUse": "Як використовувати",
+    "cta": "Порахувати в калькуляторі →"
+  }
+}

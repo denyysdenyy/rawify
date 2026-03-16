@@ -1,4 +1,4 @@
-import { ProductCategory } from '@/components/ProductSelect'
+import { ProductCategory } from '../components/ProductSelect'
 
 type ValidationResult = {
   valid: boolean

@@ -2,11 +2,14 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import WeightInput from './WeightInput'
 import ProductSelect, { products } from './ProductSelect'
-import { validateCoefficient } from "../src/utils/validation"
+import { validateCoefficient } from '../utils/validation'
 
 export default function Calculator() {
+  const t = useTranslations('calculator')
+
   const [product, setProduct] = useState('chicken_breast')
   const [method, setMethod] = useState('')
   const [rawWeight, setRawWeight] = useState('')
@@ -94,10 +97,10 @@ export default function Calculator() {
               className="flex items-baseline gap-2"
             >
               <span className="text-5xl font-bold text-gray-800">
-                {result ? Math.round(result.rawToLog) : 0}
+                {result ? Math.round(result.rawToLog) : '—'}
               </span>
               <span className="text-2xl text-gray-300 font-medium">
-                {result ? 'г сирого' : 'г'}
+                {result ? t('result') : t('resultEmpty')}
               </span>
             </motion.div>
           </AnimatePresence>
@@ -111,7 +114,7 @@ export default function Calculator() {
                 transition={{ duration: 0.2 }}
                 className="flex items-center gap-2 bg-[#F2F2F7] rounded-2xl px-4 py-2"
               >
-                <span className="text-sm text-gray-400">В лоток (готового):</span>
+                <span className="text-sm text-gray-400">{t('inContainer')}</span>
                 <span className="text-sm font-bold text-gray-700">
                   {Math.round(result.cookedPortion)} г
                 </span>
@@ -125,7 +128,7 @@ export default function Calculator() {
               animate={{ opacity: 1 }}
               className="text-xs text-blue-400 font-medium"
             >
-              точний коефіцієнт: {coefficient.toFixed(3)}
+              {t('coefficient')}: {coefficient.toFixed(3)}
             </motion.span>
           )}
         </div>
@@ -157,15 +160,15 @@ export default function Calculator() {
         />
 
         <WeightInput
-          label="Сирий вес (до готовки)"
-          placeholder="напр. 400"
+          label={t('rawWeight')}
+          placeholder={t('rawPlaceholder')}
           value={rawWeight}
           onChange={setRawWeight}
         />
 
         <WeightInput
-          label="Готовий вес (вся каструля)"
-          placeholder="напр. 900"
+          label={t('cookedWeight')}
+          placeholder={t('cookedPlaceholder')}
           value={cookedWeight}
           onChange={setCookedWeight}
         />
@@ -173,7 +176,7 @@ export default function Calculator() {
         {/* Режим порції */}
         <div className={`flex flex-col gap-3 transition-opacity duration-200 ${!isBaseReady ? 'opacity-30 pointer-events-none' : ''}`}>
           <span className="text-[11px] font-semibold tracking-widest text-gray-400 uppercase">
-            Як рахуємо порцію?
+            {t('portionMode')}
           </span>
           <div className="flex rounded-2xl overflow-hidden border border-gray-100">
             <button
@@ -182,7 +185,7 @@ export default function Calculator() {
                 mode === 'containers' ? 'bg-gray-800 text-white' : 'bg-[#F2F2F7] text-gray-400'
               }`}
             >
-              Ділити на лотки
+              {t('byContainers')}
             </button>
             <button
               onClick={() => setMode('portion')}
@@ -190,14 +193,14 @@ export default function Calculator() {
                 mode === 'portion' ? 'bg-gray-800 text-white' : 'bg-[#F2F2F7] text-gray-400'
               }`}
             >
-              Важу порцію
+              {t('byPortion')}
             </button>
           </div>
 
           {mode === 'containers' ? (
             <WeightInput
-              label="Кількість лотків"
-              placeholder="напр. 6"
+              label={t('containersLabel')}
+              placeholder={t('containersPlaceholder')}
               value={containers}
               onChange={setContainers}
               disabled={!isBaseReady}
@@ -205,8 +208,8 @@ export default function Calculator() {
             />
           ) : (
             <WeightInput
-              label="Порція готового (г)"
-              placeholder="напр. 150"
+              label={t('portionLabel')}
+              placeholder={t('portionPlaceholder')}
               value={portion}
               onChange={setPortion}
               disabled={!isBaseReady}
@@ -214,7 +217,7 @@ export default function Calculator() {
           )}
         </div>
 
-        {/* Reset кнопка */}
+        {/* Reset */}
         <AnimatePresence>
           {isDirty && (
             <motion.button
@@ -225,7 +228,7 @@ export default function Calculator() {
               onClick={handleReset}
               className="w-full py-3 rounded-2xl text-sm font-medium text-gray-400 bg-[#F2F2F7] hover:bg-red-50 hover:text-red-400 transition-all duration-200"
             >
-              Очистити все
+              {t('reset')}
             </motion.button>
           )}
         </AnimatePresence>

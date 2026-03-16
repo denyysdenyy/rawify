@@ -1,0 +1,58 @@
+{
+  "header": {
+    "beta": "beta"
+  },
+  "calculator": {
+    "result": "g raw",
+    "resultEmpty": "g",
+    "inContainer": "In container (cooked):",
+    "coefficient": "exact coefficient",
+    "product": "Product",
+    "cookingMethod": "Cooking method",
+    "selectMethod": "Select cooking method",
+    "rawWeight": "Raw weight (before cooking)",
+    "rawPlaceholder": "e.g. 400",
+    "cookedWeight": "Cooked weight (whole pot)",
+    "cookedPlaceholder": "e.g. 900",
+    "portionMode": "How to calculate portion?",
+    "byContainers": "Split into containers",
+    "byPortion": "Weigh portion",
+    "containersLabel": "Number of containers",
+    "containersPlaceholder": "e.g. 6",
+    "portionLabel": "Cooked portion (g)",
+    "portionPlaceholder": "e.g. 150",
+    "reset": "Clear all"
+  },
+  "products": {
+    "chicken_breast": "🍗 Chicken breast",
+    "chicken_thigh": "🍗 Chicken thigh",
+    "beef": "🥩 Beef",
+    "pork": "🥩 Pork",
+    "salmon": "🐟 Salmon",
+    "tuna": "🐟 Tuna",
+    "eggs": "🥚 Eggs",
+    "rice": "🍚 Rice",
+    "buckwheat": "🌾 Buckwheat",
+    "oats": "🌾 Oats"
+  },
+  "methods": {
+    "grill": "Grill / Pan",
+    "oven": "Oven",
+    "boil": "Boiled",
+    "foil": "In foil",
+    "steam": "Steamed",
+    "fry": "Fried",
+    "boil_soft": "Boiled (soft)",
+    "water": "With water",
+    "milk": "With milk"
+  },
+  "coefficient": {
+    "title": "Cooking loss & gain coefficients",
+    "description": "Select a product to see how much weight it loses or gains during cooking",
+    "meat": "Meat & Fish",
+    "grains": "Grains & Porridge",
+    "other": "Other",
+    "howToUse": "How to use",
+    "cta": "Calculate in the app →"
+  }
+}

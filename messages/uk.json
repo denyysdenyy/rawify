@@ -2,6 +2,16 @@
   "header": {
     "beta": "beta"
   },
+  "log": {
+    "title": "Лог харчування",
+    "clearAll": "Очистити лог",
+    "gCooked": "г готового",
+    "gRaw": "г сирого",
+    "save": "Зберегти",
+    "saved": "Збережено!",
+    "today": "Сьогодні",
+    "yesterday": "Вчора"
+  },
   "calculator": {
     "result": "г сирого",
     "resultEmpty": "г",
@@ -29,8 +39,6 @@
     "beef": "🥩 Яловичина",
     "pork": "🥩 Свинина",
     "salmon": "🐟 Лосось",
-    "tuna": "🐟 Тунець",
-    "eggs": "🥚 Яйця",
     "rice": "🍚 Рис",
     "buckwheat": "🌾 Гречка",
     "oats": "🌾 Вівсянка"

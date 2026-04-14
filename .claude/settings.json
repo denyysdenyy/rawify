@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat | grep -qi 'проверил' && afplay /Users/belikovdenis/sounds/fahhh.aiff 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}

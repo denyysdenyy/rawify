@@ -6,9 +6,24 @@ import '../globals.css'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] })
 
-export const metadata: Metadata = {
-  title: 'Rawify — рахуй сире, їж готове',
-  description: 'Калькулятор для перерахунку ваги готового продукту в сирий.',
+const metaByLocale: Record<string, Metadata> = {
+  uk: {
+    title: 'Rawify — рахуй сире, їж готове',
+    description: 'Калькулятор для перерахунку ваги готового продукту в сирий.',
+  },
+  en: {
+    title: 'Rawify — track raw, eat cooked',
+    description: 'Calculator to convert cooked food weight back to raw for accurate calorie tracking.',
+  },
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  return metaByLocale[locale] ?? metaByLocale.uk
 }
 
 export default async function LocaleLayout({

@@ -16,11 +16,6 @@ const ranges: Record<ProductCategory, { min: number; max: number; label: string 
     max: 1.50,
     label: 'Риба втрачає 10–33% ваги при готовці',
   },
-  eggs: {
-    min: 0.95,
-    max: 1.10,
-    label: 'Яйця майже не змінюють вагу (до 10%)',
-  },
   grains: {
     min: 0.25,
     max: 0.55,

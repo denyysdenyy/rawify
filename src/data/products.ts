@@ -1,4 +1,4 @@
-export type ProductCategory = 'meat' | 'fish' | 'eggs' | 'grains'
+export type ProductCategory = 'meat' | 'fish' | 'grains'
 
 export type Product = {
   value: string

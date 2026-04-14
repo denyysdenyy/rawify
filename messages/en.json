@@ -2,6 +2,16 @@
   "header": {
     "beta": "beta"
   },
+  "log": {
+    "title": "Food log",
+    "clearAll": "Clear log",
+    "gCooked": "g cooked",
+    "gRaw": "g raw",
+    "save": "Save",
+    "saved": "Saved!",
+    "today": "Today",
+    "yesterday": "Yesterday"
+  },
   "calculator": {
     "result": "g raw",
     "resultEmpty": "g",
@@ -29,8 +39,6 @@
     "beef": "🥩 Beef",
     "pork": "🥩 Pork",
     "salmon": "🐟 Salmon",
-    "tuna": "🐟 Tuna",
-    "eggs": "🥚 Eggs",
     "rice": "🍚 Rice",
     "buckwheat": "🌾 Buckwheat",
     "oats": "🌾 Oats"

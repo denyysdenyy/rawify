@@ -7,9 +7,15 @@ import WeightInput from './WeightInput'
 import ProductSelect from './ProductSelect'
 import { products } from '../data/products'
 import { validateCoefficient } from '../utils/validation'
+import type { LogEntry } from './AppContent'
 
-export default function Calculator() {
+type Props = {
+  onSave?: (data: Omit<LogEntry, 'id' | 'savedAt'>) => void
+}
+
+export default function Calculator({ onSave }: Props) {
   const t = useTranslations('calculator')
+  const tLog = useTranslations('log')
 
   const [product, setProduct] = useState('chicken_breast')
   const [method, setMethod] = useState('')
@@ -18,6 +24,7 @@ export default function Calculator() {
   const [mode, setMode] = useState<'containers' | 'portion'>('containers')
   const [containers, setContainers] = useState('')
   const [portion, setPortion] = useState('')
+  const [justSaved, setJustSaved] = useState(false)
 
   const isBaseReady = rawWeight.trim() !== '' && cookedWeight.trim() !== ''
   const isDirty = rawWeight || cookedWeight || containers || portion
@@ -40,6 +47,13 @@ export default function Calculator() {
     setCookedWeight('')
     setContainers('')
     setPortion('')
+  }
+
+  const handleSave = () => {
+    if (!result || !onSave) return
+    onSave({ productKey: product, methodKey: method, cookedPortion: result.cookedPortion, rawToLog: result.rawToLog })
+    setJustSaved(true)
+    setTimeout(() => setJustSaved(false), 1500)
   }
 
   const getCoefficient = (): number => {
@@ -214,20 +228,42 @@ export default function Calculator() {
           )}
         </div>
 
-        <AnimatePresence>
-          {isDirty && (
-            <motion.button
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.2 }}
-              onClick={handleReset}
-              className="w-full py-3 rounded-2xl text-sm font-medium text-gray-400 bg-[#F2F2F7] hover:bg-red-50 hover:text-red-400 transition-all duration-200"
-            >
-              {t('reset')}
-            </motion.button>
-          )}
-        </AnimatePresence>
+        <div className="flex flex-col gap-2">
+          <AnimatePresence>
+            {result && (
+              <motion.button
+                key="save"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.2 }}
+                onClick={handleSave}
+                className={`w-full py-3 rounded-2xl text-sm font-medium transition-all duration-200 ${
+                  justSaved
+                    ? 'bg-green-100 text-green-600'
+                    : 'bg-gray-800 text-white hover:bg-gray-700'
+                }`}
+              >
+                {justSaved ? tLog('saved') : tLog('save')}
+              </motion.button>
+            )}
+          </AnimatePresence>
+          <AnimatePresence>
+            {isDirty && (
+              <motion.button
+                key="reset"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.2 }}
+                onClick={handleReset}
+                className="w-full py-3 rounded-2xl text-sm font-medium text-gray-400 bg-[#F2F2F7] hover:bg-red-50 hover:text-red-400 transition-all duration-200"
+              >
+                {t('reset')}
+              </motion.button>
+            )}
+          </AnimatePresence>
+        </div>
 
       </div>
     </div>
